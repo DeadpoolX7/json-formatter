@@ -6,7 +6,7 @@ const path = require('path');
 const chalk = require('chalk');
 const { formatJSON } = require('../src/formatter');
 const { validateJSON } = require('../src/validator');
-const { readFile } = require('../src/file-handler');
+const { readFile, writeFile } = require('../src/file-handler');
 
 program
   .version('1.0.0')

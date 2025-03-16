@@ -9,5 +9,20 @@ function formatJSON(jsonString, minify = false) {
     }
   }
   
-  module.exports = { formatJSON };
+  function autoSaveFormattedJSON(filePath, formattedData, overwrite = true) {
+    try {
+      const dir = path.dirname(filePath);
+      const fileName = path.basename(filePath, '.json');
+      const newFilePath = overwrite
+        ? filePath
+        : path.join(dir, `formatted_${fileName}.json`);
+  
+      fs.writeFileSync(newFilePath, formattedData, 'utf8');
+      logSuccess(`✅ JSON saved at: ${newFilePath}`);
+    } catch (error) {
+      logError(`❌ Failed to save formatted JSON: ${error.message}`);
+    }
+  }
+
+  module.exports = { formatJSON, autoSaveFormattedJSON };
   
