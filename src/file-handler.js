@@ -12,4 +12,15 @@ function readFile(filePath) {
   }
 }
 
-module.exports = { readFile };
+function writeFile(filePath, data) {
+  try {
+    const absolutePath = path.resolve(filePath);
+    fs.writeFileSync(absolutePath, data, 'utf8');
+    logSuccess(`File saved: ${absolutePath}`);
+  } catch (error) {
+    logError(`Failed to write file: ${filePath}`);
+    throw new Error(`Failed to write file: ${filePath}`);
+  }
+}
+
+module.exports = { readFile, writeFile };
